@@ -48,4 +48,7 @@ for PATH_TO in ${PATHS_TO_PROCESS[@]}; do
   create_symlink "${PATH_TO}"
 done
 
+step "Loading '.profile' again"
+source $HOME/.profile
+
 all_done

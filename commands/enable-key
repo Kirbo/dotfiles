@@ -12,6 +12,11 @@ KEY_FILE_NAME="${KEY_NAME}.remote"
 KEY_FILE="${ROOT_DIR}/.ssh/keys/${KEY_FILE_NAME}"
 ENABLED_FILE="${ROOT_DIR}/.ssh/enabled-keys/${KEY_FILE_NAME}"
 
+if [ ! -d "${ROOT_DIR}/.ssh/enabled-keys/" ]; then
+  step "Creating '${ROOT_DIR}/.ssh/enabled-keys/' folder"
+  mkdir -p "${ROOT_DIR}/.ssh/enabled-keys/"
+fi
+
 step "Enabling key '${KEY_FILE_NAME}'"
 if [ ! -f ${KEY_FILE} ]; then
   hard_fail "The key '${KEY_FILE_NAME}' does not exist."
