@@ -1,0 +1,8 @@
+# Ignore following
+.ssh/*
+
+# Exclude following
+!.ssh/*.pub
+!.ssh/authorized_keys
+!.ssh/keys
+!.ssh/enabled-keys

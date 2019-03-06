@@ -1,0 +1,23 @@
+#!/bin/bash
+
+COMMANDS_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+ROOT_DIR=$(dirname "${COMMANDS_DIR}")
+BASH_DIR="${ROOT_DIR}/bash"
+
+source ${BASH_DIR}/_config.sh
+
+COMMANDS="${@:1}"
+
+clear
+clear
+output_divider "TERMINAL CLEARED"
+
+if [[ "${COMMANDS}" ]]; then
+  info "Executing: ${COMMANDS}";
+
+  eval "${COMMANDS}"
+
+  info "Done at: $(date '+%Y-%m-%d %H:%M:%S')"
+
+  all_done
+fi

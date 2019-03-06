@@ -1,0 +1,37 @@
+#!/bin/bash
+
+COMMANDS_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+ROOT_DIR=$(dirname "${COMMANDS_DIR}")
+BASH_DIR="${ROOT_DIR}/bash"
+
+source ${BASH_DIR}/_config.sh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+INSTALL_VERSION="${1}"
+
+old_node_version=$(node --version)
+old_yarn_version=$(yarn --version)
+old_npm_version=$(npm --version)
+
+step "Versions before update"
+minor_step "node       : ${old_node_version}"
+minor_step "yarn       : ${old_yarn_version}"
+minor_step "npm        : ${old_npm_version}"
+
+step "Installing new versions"
+nvm install $INSTALL_VERSION --reinstall-packages-from=${old_node_version}
+nvm alias default $INSTALL_VERSION
+npm install yarn -g
+
+new_node_version=$(node --version)
+new_yarn_version=$(yarn --version)
+new_npm_version=$(npm --version)
+
+step "Versions after update"
+minor_step "node       : ${new_node_version}"
+minor_step "yarn       : ${new_yarn_version}"
+minor_step "npm        : ${new_npm_version}"
+
+all_done

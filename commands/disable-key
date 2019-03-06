@@ -1,0 +1,22 @@
+#!/bin/bash
+
+COMMANDS_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+ROOT_DIR=$(dirname "${COMMANDS_DIR}")
+BASH_DIR="${ROOT_DIR}/bash"
+
+source ${BASH_DIR}/_config.sh
+
+KEY_NAME=${1}
+KEY_FILE_NAME="${KEY_NAME}.remote"
+
+KEY_FILE="${ROOT_DIR}/.ssh/keys/${KEY_FILE_NAME}"
+ENABLED_FILE="${ROOT_DIR}/.ssh/enabled-keys/${KEY_FILE_NAME}"
+
+step "Disabling key '${KEY_NAME}.remote'"
+if [ ! -f ${ENABLED_FILE} ]; then
+  step_failed "The key '${KEY_FILE_NAME}' has already been disabled."
+else
+  rm ${ROOT_DIR}/.ssh/enabled-keys/${KEY_NAME}.remote
+fi
+
+bash ${COMMANDS_DIR}/populate-authorized-keys

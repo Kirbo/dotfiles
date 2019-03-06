@@ -1,0 +1,29 @@
+#!/bin/bash
+
+COMMANDS_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+ROOT_DIR=$(dirname "${COMMANDS_DIR}")
+BASH_DIR="${ROOT_DIR}/bash"
+
+source ${BASH_DIR}/_config.sh
+
+AUTHORIZED_KEYS=".ssh/authorized_keys"
+
+step "Emptying old '${AUTHORIZED_KEYS}' file"
+echo -e "# This file is auto-generated, if you need to add anything here, please create a file e.g. '${HOME}/.ssh/keys/anyname.remote'" > ${AUTHORIZED_KEYS}
+echo -e "#   and run command: 'populate-authorized-keys'" >> ${AUTHORIZED_KEYS}
+echo -e "#   To enable key, run: 'enable-key anyname'" >> ${AUTHORIZED_KEYS}
+echo -e "#   To disable key, run: 'disable-key anyname'\n" >> ${AUTHORIZED_KEYS}
+
+step "Populating the new '${AUTHORIZED_KEYS}' file"
+COUNT_FILES=$(ls .ssh/enabled-keys/ | wc -l)
+if [ $COUNT_FILES != 0 ]; then
+  for FILE in .ssh/enabled-keys/*.remote; do
+    minor_step "Adding contents of ${FILE}"
+    cat ${FILE} >> ${AUTHORIZED_KEYS}
+  done
+fi
+
+step "Setting correct permissions for '${AUTHORIZED_KEYS}'"
+chmod u=rw,go=r ${AUTHORIZED_KEYS}
+
+all_done
