@@ -2,7 +2,9 @@
 
 ## Grant me access to your machine via SSH-key:
 
-`curl https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2015.remote >> ~/.ssh/authorized_keys`
+```
+curl https://gitlab.com/kirbo/dotfiles/raw/master/grant-me-access.sh | bash
+```
 
 
 ## Installing the stuff on your machine:
