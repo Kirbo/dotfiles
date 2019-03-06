@@ -1,8 +1,21 @@
 #!/bin/bash
 
+GREEN="\033[32m"
+NORMAL="\033[0m"
+BOLD="\033[1m"
+
+step () {
+  echo -e "${GREEN}***${DEFAULT} ${BOLD}${@}${NORMAL}"
+}
+
+all_done () {
+  echo -e "\n${GREEN}✔${NORMAL} ${BOLD}All done${NORMAL}"
+}
+
 AUTHORIZED_KEYS_EXIST=true
 
 if [ ! -d "${HOME}/.ssh" ]; then
+  step "Directory '${HOME}/.ssh' not found, creating it."
   mkdir $HOME/.ssh
   chmod u=rwx,go= $HOME/.ssh
 fi
@@ -11,8 +24,12 @@ if [ ! -f "${HOME}/.ssh/authorized_keys" ]; then
   AUTHORIZED_KEYS_EXIST=false
 fi
 
-curl https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2015.remote >> ~/.ssh/authorized_keys
+step "Adding the contents of 'https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2015.remote' into '${HOME}/.ssh/authorized_keys'"
+curl https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2015.remote >> $HOME/.ssh/authorized_keys
 
 if [ "$AUTHORIZED_KEYS_EXIST" = false ]; then
+  step "File '${HOME}/.ssh/authorized_keys' didn't exist earlier, fixing the file permissions."
   chmod u=rw,go=r $HOME/.ssh/authorized_keys
 fi
+
+all_done
