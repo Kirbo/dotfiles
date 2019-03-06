@@ -52,9 +52,4 @@ for PATH_TO in ${PATHS_TO_PROCESS[@]}; do
 done
 continue_if_succeeded
 
-step "Loading '.bashrc' again"
-source $HOME/.bashrc
-
-continue_if_succeeded
-
 all_done

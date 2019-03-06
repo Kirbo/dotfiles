@@ -10,4 +10,5 @@
 ```
 git clone https://gitlab.com/kirbo/dotfiles.git
 ./dotfiles/install.sh
+. ~/.bashrc
 ```
