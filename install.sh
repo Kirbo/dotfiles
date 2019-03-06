@@ -17,6 +17,8 @@ backup_old () {
 
   minor_step "Moving old ${OLD_PATH} into ${BACKUP_DIR}/${OLD_PATH}"
   mv "${OLD_PATH}" "${BACKUP_DIR}/${OLD_PATH}"
+
+  continue_if_succeeded
 }
 
 create_symlink () {
@@ -42,13 +44,17 @@ for PATH_TO in ${PATHS_TO_PROCESS[@]}; do
     backup_old "${PATH_TO}"
   fi
 done
+continue_if_succeeded
 
 step "Creating symlinks"
 for PATH_TO in ${PATHS_TO_PROCESS[@]}; do
   create_symlink "${PATH_TO}"
 done
+continue_if_succeeded
 
-step "Loading '.profile' again"
-source $HOME/.profile
+step "Loading '.bashrc' again"
+source $HOME/.bashrc
+
+continue_if_succeeded
 
 all_done
