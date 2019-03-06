@@ -1,6 +1,9 @@
 #!/bin/bash
 
-source bash/_config.sh
+ROOT_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+BASH_DIR="${ROOT_DIR}/bash"
+
+source ${BASH_DIR}/_config.sh
 
 cd $HOME
 
