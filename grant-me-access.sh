@@ -2,14 +2,15 @@
 
 GREEN="\033[32m"
 NORMAL="\033[0m"
+DEFAULT="\033[39m"
 BOLD="\033[1m"
 
 step () {
-  echo -e "${GREEN}***${DEFAULT} ${BOLD}${@}${NORMAL}"
+  echo -e "${GREEN}***${NORMAL} ${@}"
 }
 
 all_done () {
-  echo -e "\n${GREEN}✔${NORMAL} ${BOLD}All done${NORMAL}"
+  echo -e "  ${GREEN}✔${NORMAL} All done"
 }
 
 AUTHORIZED_KEYS_EXIST=true
@@ -25,7 +26,7 @@ if [ ! -f "${HOME}/.ssh/authorized_keys" ]; then
 fi
 
 step "Adding the contents of 'https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2015.remote' into '${HOME}/.ssh/authorized_keys'"
-curl https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2015.remote >> $HOME/.ssh/authorized_keys
+curl -s https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2015.remote >> $HOME/.ssh/authorized_keys
 
 if [ "$AUTHORIZED_KEYS_EXIST" = false ]; then
   step "File '${HOME}/.ssh/authorized_keys' didn't exist earlier, fixing the file permissions."
