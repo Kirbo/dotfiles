@@ -30,14 +30,6 @@ create_symlink () {
   continue_if_succeeded
 }
 
-PATHS_TO_PROCESS=(
-  '.ssh'
-  '.bash_aliases'
-  '.bashrc'
-  '.inputrc'
-  '.npmrc'
-)
-
 step "Backing up old contents"
 for PATH_TO in ${PATHS_TO_PROCESS[@]}; do
   if [ -f $PATH_TO ] || [ -d $PATH_TO ]; then

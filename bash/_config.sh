@@ -9,3 +9,13 @@ BACKUP_DIR="${ROOT_DIR}/backups"
 # Includes
 source ${BASH_DIR}/colors.sh
 source ${BASH_DIR}/functions.sh
+
+# Variables
+KEY_EXTENSION='pub'
+PATHS_TO_PROCESS=(
+  '.ssh'
+  '.bash_aliases'
+  '.bashrc'
+  '.inputrc'
+  '.npmrc'
+)

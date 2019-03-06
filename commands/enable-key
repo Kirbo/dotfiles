@@ -7,7 +7,7 @@ BASH_DIR="${ROOT_DIR}/bash"
 source ${BASH_DIR}/_config.sh
 
 KEY_NAME=${1}
-KEY_FILE_NAME="${KEY_NAME}.remote"
+KEY_FILE_NAME="${KEY_NAME}.${KEY_EXTENSION}"
 
 KEY_FILE="${ROOT_DIR}/.ssh/keys/${KEY_FILE_NAME}"
 ENABLED_FILE="${ROOT_DIR}/.ssh/enabled-keys/${KEY_FILE_NAME}"
@@ -25,7 +25,7 @@ fi
 if [ -f ${ENABLED_FILE} ]; then
   step_failed "The key '${KEY_FILE_NAME}' has already been enabled."
 else
-  ln -s ${ROOT_DIR}/.ssh/keys/${KEY_NAME}.remote ${ROOT_DIR}/.ssh/enabled-keys/${KEY_NAME}.remote
+  ln -s ${ROOT_DIR}/.ssh/keys/${KEY_NAME}.${KEY_EXTENSION} ${ROOT_DIR}/.ssh/enabled-keys/${KEY_NAME}.${KEY_EXTENSION}
 fi
 
 bash ${COMMANDS_DIR}/populate-authorized-keys
