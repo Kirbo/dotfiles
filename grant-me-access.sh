@@ -14,5 +14,5 @@ fi
 curl https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2015.remote >> ~/.ssh/authorized_keys
 
 if [ !$AUTHORIZED_KEYS_EXIST ]; then
-  chmod u=rwx,go= $HOME/.ssh/authorized_keys
+  chmod u=rw,go=r $HOME/.ssh/authorized_keys
 fi
