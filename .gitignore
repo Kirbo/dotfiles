@@ -1,5 +1,6 @@
 # Ignore following
 .ssh/*
+backups/*
 
 # Exclude following
 !.ssh/*.pub
