@@ -5,4 +5,3 @@ export HISTSIZE=100000
 
 export EDITOR=nano
 
-export PATH="~/dotfiles/commands:$PATH"

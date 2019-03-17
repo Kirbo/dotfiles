@@ -30,6 +30,9 @@ create_symlink () {
   continue_if_succeeded
 }
 
+step "Adding \$PATH into .bashrc"
+echo "export PATH=\"${ROOT_DIR}/commands:\$PATH\"" >> ${ROOT_DIR}/.bashrc
+
 step "Backing up old contents"
 for PATH_TO in ${PATHS_TO_PROCESS[@]}; do
   if [ -f $PATH_TO ] || [ -d $PATH_TO ]; then
