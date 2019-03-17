@@ -14,7 +14,7 @@ ENABLED_FILE="${ROOT_DIR}/.ssh/enabled-keys/${KEY_FILE_NAME}"
 
 step "Disabling key '${KEY_NAME}.${KEY_EXTENSION}'"
 if [ ! -f ${ENABLED_FILE} ]; then
-  step_failed "The key '${KEY_FILE_NAME}' has already been disabled."
+  step_failed "The key '${KEY_FILE_NAME}' was not enabled."
 else
   rm ${ROOT_DIR}/.ssh/enabled-keys/${KEY_NAME}.${KEY_EXTENSION}
 fi
