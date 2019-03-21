@@ -1,0 +1,28 @@
+#!/bin/bash
+
+COMMANDS_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+ROOT_DIR=$(dirname "${COMMANDS_DIR}")
+BASH_DIR="${ROOT_DIR}/bash"
+
+source ${BASH_DIR}/_config.sh
+
+KEY_NAME=${1}
+REMOTE_HOST=${2}
+KEY_FILE_NAME="${KEY_NAME}.${KEY_EXTENSION}"
+
+KEY_FILE="${ROOT_DIR}/.ssh/keys/${KEY_FILE_NAME}"
+
+if [ ! -f ${KEY_FILE} ]; then
+  hard_fail "The key '${KEY_FILE_NAME}' does not exist."
+fi
+
+step "Enabling key '${KEY_FILE_NAME}' on ${REMOTE_HOST}"
+STATUS=$(ssh ${REMOTE_HOST} "[ ! -f '~/.ssh/authorized_keys' ]; mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys fi && if ! grep 'Dotfiles enabled key ${KEY_FILE_NAME}' ~/.ssh/authorized_keys >> /dev/null; then echo -e \"\n# Dotfiles enabled key ${KEY_FILE_NAME}:\n$(cat ${KEY_FILE})\" >> .ssh/authorized_keys; else echo \"  * Already enabled\"; fi")
+
+if ! [[ "${STATUS}" == *"  * Already enabled"* ]]; then
+  minor_step "Now try logging in by using: $(info ssh ${REMOTE_HOST})"
+else
+  minor_step "Already enabled, login by using: $(info ssh ${REMOTE_HOST})"
+fi
+
+all_done
