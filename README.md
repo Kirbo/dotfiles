@@ -65,3 +65,11 @@ reload-terminal
 update-dotfiles
 reload-terminal
 ```
+
+
+## Enable SSH-key in remote server:
+
+To enable `.ssh/keys/MBP2018.pub` in `kirbo@devaus.eu`, run command:
+```
+remote-enable-key MBP2018 kirbo@devaus.eu
+```
