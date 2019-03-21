@@ -1,6 +1,7 @@
 # Ignore following
 .ssh/*
 backups/*
+.bash_paths
 
 # Exclude following
 !.ssh/*.pub
