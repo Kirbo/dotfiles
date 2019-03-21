@@ -10,6 +10,9 @@ cd $ROOT_DIR
 
 REPOSITORY_URL=$(grep "url = " .git/config | sed "s/.*url = \(.*\)/\1/")
 
+step "Ignore all '.local_*' file changes"
+git update-index --assume-unchanged .local_*
+
 step "Checking local changes"
 GIT_STATUS=$(git status)
 

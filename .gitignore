@@ -3,6 +3,7 @@
 backups/*
 .bash_paths
 .nvm
+.local_*
 
 # Exclude following
 !.ssh/*.pub
