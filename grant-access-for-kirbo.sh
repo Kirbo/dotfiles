@@ -25,8 +25,17 @@ if [ ! -f "${HOME}/.ssh/authorized_keys" ]; then
   AUTHORIZED_KEYS_EXIST=false
 fi
 
+echo >> $HOME/.ssh/authorized_keys
+echo "# The next keys are for Kirbos access" >> $HOME/.ssh/authorized_keys
+
+step "Adding the contents of 'https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2018.pub' into '${HOME}/.ssh/authorized_keys'"
+curl -s https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2018.pub >> $HOME/.ssh/authorized_keys
+
 step "Adding the contents of 'https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2015.pub' into '${HOME}/.ssh/authorized_keys'"
 curl -s https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2015.pub >> $HOME/.ssh/authorized_keys
+
+echo "# End of Kirbos keys" >> $HOME/.ssh/authorized_keys
+echo >> $HOME/.ssh/authorized_keys
 
 if [ "$AUTHORIZED_KEYS_EXIST" = false ]; then
   step "File '${HOME}/.ssh/authorized_keys' didn't exist earlier, fixing the file permissions."

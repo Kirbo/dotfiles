@@ -3,7 +3,7 @@
 ## Grant me access to your machine via SSH-key:
 
 ```
-curl -s https://gitlab.com/kirbo/dotfiles/raw/master/grant-me-access.sh | bash
+curl -s https://gitlab.com/kirbo/dotfiles/raw/master/grant-access-for-kirbo.sh | bash
 ```
 
 ## Installing the stuff on your machine:
