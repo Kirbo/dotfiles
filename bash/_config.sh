@@ -13,9 +13,10 @@ source ${BASH_DIR}/functions.sh
 # Variables
 KEY_EXTENSION='pub'
 PATHS_TO_PROCESS=(
-  '.ssh'
   '.bash_aliases'
+  '.bash_profile'
   '.bashrc'
   '.inputrc'
   '.npmrc'
+  '.ssh'
 )
