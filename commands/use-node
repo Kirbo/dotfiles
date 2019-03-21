@@ -15,7 +15,7 @@ old_node_version=$(node --version)
 old_yarn_version=$(yarn --version)
 old_npm_version=$(npm --version)
 
-step "Versions before update"
+step "Versions before"
 minor_step "node       : ${old_node_version}"
 minor_step "yarn       : ${old_yarn_version}"
 minor_step "npm        : ${old_npm_version}"
@@ -29,7 +29,7 @@ new_node_version=$(node --version)
 new_yarn_version=$(yarn --version)
 new_npm_version=$(npm --version)
 
-step "Versions after update"
+step "Versions after"
 minor_step "node       : ${new_node_version}"
 minor_step "yarn       : ${new_yarn_version}"
 minor_step "npm        : ${new_npm_version}"

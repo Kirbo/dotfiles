@@ -24,20 +24,20 @@ install-nvm
 
 To use version `8.15.1`
 ```
-update-nvm 8.15.1
+use-node 8.15.1
 ```
 
 To use version `10.15.3`
 ```
-update-nvm 10.15.3
+use-node 10.15.3
 ```
 
 To use version `0.12.8`
 ```
-update-nvm 0.12.8
+use-node 0.12.8
 ```
 
-Note that the command `update-nvm` also switched `npm` and `yarn` for the latest version for
+Note that the command `use-node` also switched `npm` and `yarn` for the latest version for
 the version of `node` you wanted to switch to. This command will also re-install all
 the global packages you have installed, with the node version you wanted to use, so
 in theory you shouldn't have to do anything manually, just run the command as shown above
