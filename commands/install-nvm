@@ -1,0 +1,37 @@
+#!/bin/bash
+
+ROOT_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+BASH_DIR="${ROOT_DIR}/../bash"
+
+source ${BASH_DIR}/_config.sh
+
+cd $HOME
+
+NVM_DIR="${HOME}/.nvm"
+export PROFILE="${HOME}/.bash_paths"
+
+mkdir -p $NVM_DIR
+
+step "Downloading nvm"
+curl -so- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+
+if [ -d "${NVM_DIR}" ]; then
+  if ! command grep -qc '$NVM_DIR/bash_completion' "$PROFILE"; then
+    step "Adding nvm bash_completion info ${PROFILE}"
+    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> $PROFILE
+  fi
+
+  . "$NVM_DIR/nvm.sh"
+
+  step "Installing latest node lts"
+  nvm install node
+
+  step "Installing latest yarn"
+  npm install -g yarn
+
+  all_done
+
+  info "Reload your terminal by running command: reload-terminal"
+else
+  hard_fail "Folder '${HOME}/.nvm' not found" 
+fi

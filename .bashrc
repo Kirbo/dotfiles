@@ -6,4 +6,3 @@ export HISTCONTROL=ignoredups
 export HISTSIZE=100000
 
 export EDITOR=nano
-
