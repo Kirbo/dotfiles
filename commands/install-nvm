@@ -13,7 +13,7 @@ export PROFILE="${HOME}/.bash_paths"
 mkdir -p $NVM_DIR
 
 step "Downloading nvm"
-curl -so- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+curl -so- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
 if [ -d "${NVM_DIR}" ]; then
   if ! command grep -qc '$NVM_DIR/bash_completion' "$PROFILE"; then
