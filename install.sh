@@ -47,6 +47,8 @@ for PATH_TO in ${PATHS_TO_PROCESS[@]}; do
 done
 continue_if_succeeded
 
+cd ${ROOT_DIR}
+
 step "Ignore all '.local_*' file changes"
 git update-index --assume-unchanged .local_*
 

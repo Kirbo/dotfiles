@@ -14,6 +14,7 @@ source ${BASH_DIR}/functions.sh
 KEY_EXTENSION='pub'
 PATHS_TO_PROCESS=(
   '.bash_aliases'
+  '.bash_paths'
   '.bash_profile'
   '.bashrc'
   '.inputrc'
