@@ -18,6 +18,7 @@ PATHS_TO_PROCESS=(
   '.bash_profile'
   '.bashrc'
   '.inputrc'
+  '.local_bash_aliases'
   '.npmrc'
   '.ssh'
 )
