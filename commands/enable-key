@@ -1,20 +1,18 @@
 #!/bin/bash
 
-COMMANDS_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-ROOT_DIR=$(dirname "${COMMANDS_DIR}")
-BASH_DIR="${ROOT_DIR}/bash"
+BASH_DIR="${DOTFILES}/bash"
 
 source ${BASH_DIR}/_config.sh
 
 KEY_NAME=${1}
 KEY_FILE_NAME="${KEY_NAME}.${KEY_EXTENSION}"
 
-KEY_FILE="${ROOT_DIR}/.ssh/keys/${KEY_FILE_NAME}"
-ENABLED_FILE="${ROOT_DIR}/.ssh/enabled-keys/${KEY_FILE_NAME}"
+KEY_FILE="${DOTFILES}/.ssh/keys/${KEY_FILE_NAME}"
+ENABLED_FILE="${DOTFILES}/.ssh/enabled-keys/${KEY_FILE_NAME}"
 
-if [ ! -d "${ROOT_DIR}/.ssh/enabled-keys/" ]; then
-  step "Creating '${ROOT_DIR}/.ssh/enabled-keys/' folder"
-  mkdir -p "${ROOT_DIR}/.ssh/enabled-keys/"
+if [ ! -d "${DOTFILES}/.ssh/enabled-keys/" ]; then
+  step "Creating '${DOTFILES}/.ssh/enabled-keys/' folder"
+  mkdir -p "${DOTFILES}/.ssh/enabled-keys/"
 fi
 
 step "Enabling key '${KEY_FILE_NAME}'"
@@ -25,7 +23,7 @@ fi
 if [ -f ${ENABLED_FILE} ]; then
   step_failed "The key '${KEY_FILE_NAME}' has already been enabled."
 else
-  ln -s ${ROOT_DIR}/.ssh/keys/${KEY_NAME}.${KEY_EXTENSION} ${ROOT_DIR}/.ssh/enabled-keys/${KEY_NAME}.${KEY_EXTENSION}
+  ln -s ${DOTFILES}/.ssh/keys/${KEY_NAME}.${KEY_EXTENSION} ${DOTFILES}/.ssh/enabled-keys/${KEY_NAME}.${KEY_EXTENSION}
 fi
 
 bash ${COMMANDS_DIR}/populate-authorized-keys

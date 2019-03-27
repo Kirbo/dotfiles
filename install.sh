@@ -1,22 +1,24 @@
 #!/bin/bash
 
-ROOT_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-BASH_DIR="${ROOT_DIR}/bash"
+DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+BASH_DIR="${DOTFILES}/bash"
 
 source ${BASH_DIR}/_config.sh
+
+THIS_BACKUP="${BACKUP_DIR}/$(date '+%Y-%m-%d_%H:%M:%S')"
 
 cd $HOME
 
 backup_old () {
   OLD_PATH=${1}
 
-  if [ ! -d "${BACKUP_DIR}" ]; then
-    minor_step "Creating a backup folder for old contents: '${BACKUP_DIR}'"
-    mkdir -p "${BACKUP_DIR}"
+  if [ ! -d "${THIS_BACKUP}" ]; then
+    minor_step "Creating a backup folder for old contents: '${THIS_BACKUP}'"
+    mkdir -p "${THIS_BACKUP}"
   fi
 
-  minor_step "Moving old ${OLD_PATH} into ${BACKUP_DIR}/${OLD_PATH}"
-  mv "${OLD_PATH}" "${BACKUP_DIR}/${OLD_PATH}"
+  minor_step "Moving old ${OLD_PATH} into ${THIS_BACKUP}/${OLD_PATH}"
+  mv "${OLD_PATH}" "${THIS_BACKUP}/${OLD_PATH}"
 
   continue_if_succeeded
 }
@@ -25,13 +27,14 @@ create_symlink () {
   SYMLINK_TO=${1}
 
   minor_step "${SYMLINK_TO}"
-  ln -s "${ROOT_DIR}/${SYMLINK_TO}" "${SYMLINK_TO}"
+  ln -s "${DOTFILES}/${SYMLINK_TO}" "${SYMLINK_TO}"
 
   continue_if_succeeded
 }
 
 step 'Adding $PATH into .bash_paths'
-echo "export PATH=\"${ROOT_DIR}/commands:\$PATH\"" >> ${ROOT_DIR}/.bash_paths
+echo "export DOTFILES=\"${DOTFILES}\"" >> ${DOTFILES}/.bash_paths
+echo "export PATH=\"\${DOTFILES}/commands:\$PATH\"" >> ${DOTFILES}/.bash_paths
 
 step "Backing up old contents"
 for PATH_TO in ${PATHS_TO_PROCESS[@]}; do
@@ -47,9 +50,11 @@ for PATH_TO in ${PATHS_TO_PROCESS[@]}; do
 done
 continue_if_succeeded
 
-cd ${ROOT_DIR}
+cd ${DOTFILES}
 
 step "Ignore all '.local_*' file changes"
 git update-index --assume-unchanged .local_*
 
 all_done
+
+info "Remember to re-open terminal!"

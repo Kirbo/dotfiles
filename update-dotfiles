@@ -1,12 +1,10 @@
 #!/bin/bash
 
-COMMANDS_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-ROOT_DIR=$(dirname "${COMMANDS_DIR}")
-BASH_DIR="${ROOT_DIR}/bash"
+BASH_DIR="${DOTFILES}/bash"
 
 source ${BASH_DIR}/_config.sh
 
-cd $ROOT_DIR
+cd $DOTFILES
 
 REPOSITORY_URL=$(grep "url = " .git/config | sed "s/.*url = \(.*\)/\1/")
 
@@ -31,3 +29,5 @@ fi
 
 
 all_done
+
+reload-terminal

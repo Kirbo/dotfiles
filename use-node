@@ -1,13 +1,8 @@
 #!/bin/bash
 
-COMMANDS_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-ROOT_DIR=$(dirname "${COMMANDS_DIR}")
-BASH_DIR="${ROOT_DIR}/bash"
+BASH_DIR="${DOTFILES}/bash"
 
 source ${BASH_DIR}/_config.sh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 INSTALL_VERSION="${1}"
 
@@ -23,6 +18,7 @@ minor_step "npm        : ${old_npm_version}"
 step "Installing new versions"
 nvm install $INSTALL_VERSION --reinstall-packages-from=${old_node_version}
 nvm alias default $INSTALL_VERSION
+nvm use $INSTALL_VERSION
 npm install yarn -g
 
 new_node_version=$(node --version)

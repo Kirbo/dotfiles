@@ -1,4 +1,4 @@
 alias reload-terminal=". ~/.bash_profile"
 
-alias far='ssh kirbo@tunkkaus.com'
-alias devaus='ssh kirbo@devaus.eu'
+alias use-node="source ${DOTFILES}/use-node"
+alias update-dotfiles="source ${DOTFILES}/update-dotfiles"

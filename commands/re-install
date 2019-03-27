@@ -1,0 +1,24 @@
+#!/bin/bash
+
+COMMANDS_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+DOTFILES=$(cd $(dirname "${COMMANDS_DIR}") && pwd)
+BASH_DIR="${DOTFILES}/bash"
+
+source ${BASH_DIR}/_config.sh
+
+cd $HOME
+
+remove_symlink () {
+  SYMLINK_TO=${1}
+
+  minor_step "${SYMLINK_TO}"
+  $(rm "${SYMLINK_TO}" 2> /dev/null)
+}
+
+step "Removing symlinks"
+for PATH_TO in ${PATHS_TO_PROCESS[@]}; do
+  remove_symlink "${PATH_TO}"
+done
+
+step "Re-installing"
+${DOTFILES}/install.sh

@@ -1,8 +1,6 @@
 #!/bin/bash
 
-COMMANDS_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-ROOT_DIR=$(dirname "${COMMANDS_DIR}")
-BASH_DIR="${ROOT_DIR}/bash"
+BASH_DIR="${DOTFILES}/bash"
 
 source ${BASH_DIR}/_config.sh
 
@@ -10,7 +8,7 @@ KEY_NAME=${1}
 REMOTE_HOST=${2}
 KEY_FILE_NAME="${KEY_NAME}.${KEY_EXTENSION}"
 
-KEY_FILE="${ROOT_DIR}/.ssh/keys/${KEY_FILE_NAME}"
+KEY_FILE="${DOTFILES}/.ssh/keys/${KEY_FILE_NAME}"
 
 if [ ! -f ${KEY_FILE} ]; then
   hard_fail "The key '${KEY_FILE_NAME}' does not exist."

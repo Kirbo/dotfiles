@@ -1,12 +1,10 @@
 #!/bin/bash
 
-COMMANDS_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-ROOT_DIR=$(dirname "${COMMANDS_DIR}")
-BASH_DIR="${ROOT_DIR}/bash"
+BASH_DIR="${DOTFILES}/bash"
 
 source ${BASH_DIR}/_config.sh
 
-AUTHORIZED_KEYS="${ROOT_DIR}/.ssh/authorized_keys"
+AUTHORIZED_KEYS="${DOTFILES}/.ssh/authorized_keys"
 
 step "Emptying old '${AUTHORIZED_KEYS}' file"
 echo -e "# This file is auto-generated, if you need to add anything here, please create a file e.g. '${HOME}/.ssh/keys/any-name.${KEY_EXTENSION}'" > ${AUTHORIZED_KEYS}
@@ -15,9 +13,9 @@ echo -e "#   To enable key, run: 'enable-key any-name'" >> ${AUTHORIZED_KEYS}
 echo -e "#   To disable key, run: 'disable-key any-name'\n" >> ${AUTHORIZED_KEYS}
 
 step "Populating the new '${AUTHORIZED_KEYS}' file"
-COUNT_FILES=$(ls $ROOT_DIR/.ssh/enabled-keys/ | wc -l)
+COUNT_FILES=$(ls $DOTFILES/.ssh/enabled-keys/ | wc -l)
 if [ $COUNT_FILES != 0 ]; then
-  for FILE in $ROOT_DIR/.ssh/enabled-keys/*.${KEY_EXTENSION}; do
+  for FILE in $DOTFILES/.ssh/enabled-keys/*.${KEY_EXTENSION}; do
     minor_step "Adding contents of ${FILE}"
     cat ${FILE} >> ${AUTHORIZED_KEYS}
   done

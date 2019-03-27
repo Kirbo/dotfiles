@@ -63,7 +63,6 @@ reload-terminal
 
 ```
 update-dotfiles
-reload-terminal
 ```
 
 

@@ -1,22 +1,20 @@
 #!/bin/bash
 
-COMMANDS_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-ROOT_DIR=$(dirname "${COMMANDS_DIR}")
-BASH_DIR="${ROOT_DIR}/bash"
+BASH_DIR="${DOTFILES}/bash"
 
 source ${BASH_DIR}/_config.sh
 
 KEY_NAME=${1}
 KEY_FILE_NAME="${KEY_NAME}.${KEY_EXTENSION}"
 
-KEY_FILE="${ROOT_DIR}/.ssh/keys/${KEY_FILE_NAME}"
-ENABLED_FILE="${ROOT_DIR}/.ssh/enabled-keys/${KEY_FILE_NAME}"
+KEY_FILE="${DOTFILES}/.ssh/keys/${KEY_FILE_NAME}"
+ENABLED_FILE="${DOTFILES}/.ssh/enabled-keys/${KEY_FILE_NAME}"
 
 step "Disabling key '${KEY_NAME}.${KEY_EXTENSION}'"
 if [ ! -f ${ENABLED_FILE} ]; then
   step_failed "The key '${KEY_FILE_NAME}' was not enabled."
 else
-  rm ${ROOT_DIR}/.ssh/enabled-keys/${KEY_NAME}.${KEY_EXTENSION}
+  rm ${DOTFILES}/.ssh/enabled-keys/${KEY_NAME}.${KEY_EXTENSION}
 fi
 
 bash ${COMMANDS_DIR}/populate-authorized-keys
