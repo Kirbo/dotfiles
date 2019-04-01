@@ -11,8 +11,10 @@ cd $HOME
 remove_symlink () {
   SYMLINK_TO=${1}
 
-  minor_step "${SYMLINK_TO}"
-  $(rm "${SYMLINK_TO}" 2> /dev/null)
+  if [[ -L "${SYMLINK_TO}" ]]; then
+    minor_step "${SYMLINK_TO}"
+    $(rm "${SYMLINK_TO}" 2> /dev/null)
+  fi
 }
 
 step "Removing symlinks"
