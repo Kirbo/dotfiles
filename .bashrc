@@ -1,8 +1,8 @@
 [ -s "$HOME/.bash_paths" ]        && . $HOME/.bash_paths
 [ -s "$HOME/.bash_aliases" ]      && . $HOME/.bash_aliases
 
-for FILE in $(ls -A local); do
-  [ -s "$HOME/local/${FILE}" ]    && . $HOME/local/${FILE}
+for FILE in $(ls -A ${DOTFILES}/local); do
+  [ -s "${DOTFILES}/local/${FILE}" ]    && . ${DOTFILES}/local/${FILE}
 done
 
 export HISTCONTROL=ignoredups
