@@ -3,10 +3,11 @@
 backups/*
 .bash_paths
 .nvm
-.local_*
+local/*
 
 # Exclude following
 !.ssh/*.pub
 !.ssh/authorized_keys
 !.ssh/keys
 !.ssh/enabled-keys
+!local/.keep

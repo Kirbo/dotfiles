@@ -52,9 +52,6 @@ continue_if_succeeded
 
 cd ${DOTFILES}
 
-step "Ignore all '.local_*' file changes"
-git update-index --assume-unchanged .local_*
-
 all_done
 
 info "Remember to re-open terminal!"
