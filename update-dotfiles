@@ -9,6 +9,7 @@ cd $DOTFILES
 REPOSITORY_URL=$(grep "url = " .git/config | sed "s/.*url = \(.*\)/\1/")
 
 step "Git assume no change"
+git reset ${DOTFILES}/.ssh/authorized_keys
 git update-index --assume-unchanged ${DOTFILES}/.ssh/authorized_keys
 
 step "Checking local changes"
@@ -27,6 +28,7 @@ if [[ "$GIT_STATUS" == *"Changes not staged for commit"* ]]; then
   STASH_POP=$(git stash pop $(git stash list | grep "before_update" | sed "s/\(stash\@{\(.*\)}\):\(.*\)/\1/") >> /dev/null)
 fi
 
+populate-authorized-keys
 
 all_done
 
