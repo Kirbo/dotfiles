@@ -3,7 +3,7 @@ alias reload-terminal=". ~/.bash_profile"
 alias use-node="source ${DOTFILES}/use-node"
 alias update-dotfiles="source ${DOTFILES}/update-dotfiles"
 
-alias ls='ls --color=auto'
+alias ls='ls -G'
 
 alias far="ssh kirbo@tunkkaus.com"
 alias farr="ssh root@tunkkaus.com"

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+BASH_DIR="${DOTFILES}/bash"
+
+source ${BASH_DIR}/_config.sh
+
+COMMANDS="${@:1}"
+
+LINES=$(${COMMANDS})
+STATUS=$?
+
+echo -e "${LINES}"
+
+echo "Line count: $(echo "${LINES}" | wc -l)"
