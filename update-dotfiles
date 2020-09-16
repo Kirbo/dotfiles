@@ -11,6 +11,7 @@ REPOSITORY_URL=$(grep "url = " .git/config | sed "s/.*url = \(.*\)/\1/")
 step "Git assume no change"
 git reset ${DOTFILES}/.ssh/authorized_keys
 git update-index --assume-unchanged ${DOTFILES}/.ssh/authorized_keys
+git checkout ${DOTFILES}/.ssh/authorized_keys
 
 step "Checking local changes"
 GIT_STATUS=$(git status)
