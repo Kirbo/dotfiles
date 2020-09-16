@@ -7,5 +7,5 @@ GO_INSTALLED=$(which go)
 if ! [[ -z "${GO}" ]]; then
 	export GOROOT=$(go env GOROOT)
 	export GOPATH=$(go env GOPATH)
-	export PATH="${PATH}:${GOPATH}/bin"
+	export PATH="${GOPATH}/bin:${GOROOT}/bin:${PATH}"
 fi
