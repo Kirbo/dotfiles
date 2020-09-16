@@ -7,7 +7,7 @@ local/*
 
 # Exclude following
 !.ssh/*.pub
-!.ssh/authorized_keys
+#!.ssh/authorized_keys
 !.ssh/keys
-!.ssh/enabled-keys
-!local/.keep
+#!.ssh/enabled-keys
+!*/.keep

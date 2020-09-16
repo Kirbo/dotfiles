@@ -19,7 +19,7 @@ curl -s https://gitlab.com/kirbo/dotfiles/raw/master/grant-access-for-kirbo.sh |
 ```
 git clone https://gitlab.com/kirbo/dotfiles.git
 ./dotfiles/install.sh
-. ~/.bashrc_profile
+. ~/.bash_profile
 ```
 
 ### Installing latest `nvm`, `node`, `npm` and `yarn` on your machine:

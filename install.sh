@@ -52,6 +52,15 @@ continue_if_succeeded
 
 cd ${DOTFILES}
 
+step "Git assume no change"
+git update-index --assume-unchanged ${DOTFILES}/.ssh/authorized_keys
+continue_if_succeeded
+
+step "Copying old 'id_rsa'"
+cp ${THIS_BACKUP}/.ssh/id_rsa ${DOTFILES}/.ssh/id_rsa
+continue_if_succeeded
+
+
 all_done
 
 info "Remember to re-open terminal!"
