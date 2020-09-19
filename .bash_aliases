@@ -12,6 +12,7 @@ alias devausr="ssh root@devaus.eu"
 alias cicdr="ssh root@cicd.fail"
 alias harder="ssh kirbo@harder.fi"
 alias slan="ssh slan@saunalanit.org"
+alias disqualified="ssh disqualified@tunkkaus.com"
 
 alias rasp="ssh pi@192.168.1.200"
 alias rasp4="ssh pi@192.168.1.210"
