@@ -1,0 +1,39 @@
+#!/bin/bash
+
+parseFlag () {
+    SHORT=$(cat <<< "${1}" | sed 's/-\([[:alpha:]]*\).*/\1/')
+    FLAG=$(cat <<< "${1}" | sed 's/-*\([[:alpha:]]*\).*/\1/')
+    VALUE=$(cat <<< "${1}" | sed 's/-*\([[:alpha:]]*\)\([ |=]\(.*\)\).*/\3/')
+    ORIGINAL_VALUE=${VALUE}
+
+    if [[ "${1}" == "${VALUE}" ]]; then
+        VALUE=true
+    fi
+
+    if [[ ! -z "${SHORT}" ]] && [[ ${#SHORT} > 1 ]]; then
+        for (( i=0; i<${#SHORT}; i++ )); do
+            if (( $i < $(( ${#SHORT} - 1)) )); then
+                VALUE=true
+            elif [[ "${ORIGINAL_VALUE}" != "${1}" ]]; then
+                VALUE=${ORIGINAL_VALUE}
+            fi
+            FLAG="${SHORT:$i:1}"
+
+            echo -e "FLAG:  ${FLAG}\t VALUE:  ${VALUE}"
+            # echo "${FLAG} ${VALUE}"
+        done
+        return
+    fi
+    
+    echo -e "FLAG:  ${FLAG}\t VALUE:  ${VALUE}"
+    # echo "${FLAG} ${VALUE}"
+}
+
+parseFlags () {
+    FLAGS=$(cat <<< "$@" | grep -oEi "(-{1,2}(\w+)([\b |=](\w+))?)")
+    while IFS= read -r FLAG; do
+        parseFlag "${FLAG}"
+    done <<< "${FLAGS}"
+}
+
+parseFlags "$@"
