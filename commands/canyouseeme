@@ -1,0 +1,12 @@
+#!/bin/bash
+
+PORT=${1-:80}
+
+STATUS=$(curl -sd port="${PORT}" https://canyouseeme.org | grep -o 'Success\|Error')
+
+OPEN=false
+if [[ "${STATUS}" == "Success" ]]; then
+	OPEN=true
+fi
+
+echo "Port ${PORT} open: ${OPEN}"
