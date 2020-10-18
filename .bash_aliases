@@ -15,6 +15,6 @@ alias slan="ssh slan@saunalanit.org"
 alias disqualified="ssh disqualified@tunkkaus.com"
 
 alias rasp="ssh pi@192.168.1.200"
-alias rasp4="ssh pi@192.168.1.210"
+alias rasp4="ssh kirbo@192.168.1.210"
 
 alias acme.sh=~/.acme.sh/acme.sh
