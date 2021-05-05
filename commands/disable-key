@@ -2,19 +2,19 @@
 
 BASH_DIR="${DOTFILES}/bash"
 
-source ${BASH_DIR}/_config.sh
+# shellcheck source=/dev/null
+source "${BASH_DIR}/_config.sh"
 
 KEY_NAME=${1}
 KEY_FILE_NAME="${KEY_NAME}.${KEY_EXTENSION}"
 
-KEY_FILE="${DOTFILES}/.ssh/keys/${KEY_FILE_NAME}"
 ENABLED_FILE="${DOTFILES}/.ssh/enabled-keys/${KEY_FILE_NAME}"
 
 step "Disabling key '${KEY_NAME}.${KEY_EXTENSION}'"
-if [ ! -f ${ENABLED_FILE} ]; then
+if [ ! -f "${ENABLED_FILE}" ]; then
   step_failed "The key '${KEY_FILE_NAME}' was not enabled."
 else
-  rm ${DOTFILES}/.ssh/enabled-keys/${KEY_NAME}.${KEY_EXTENSION}
+  rm "${DOTFILES}/.ssh/enabled-keys/${KEY_NAME}.${KEY_EXTENSION}"
 fi
 
-bash ${COMMANDS_DIR}/populate-authorized-keys
+bash "${COMMANDS_DIR}/populate-authorized-keys"

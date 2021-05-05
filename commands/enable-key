@@ -2,7 +2,8 @@
 
 BASH_DIR="${DOTFILES}/bash"
 
-source ${BASH_DIR}/_config.sh
+# shellcheck source=/dev/null
+source "${BASH_DIR}/_config.sh"
 
 KEY_NAME=${1}
 KEY_FILE_NAME="${KEY_NAME}.${KEY_EXTENSION}"
@@ -16,14 +17,14 @@ if [ ! -d "${DOTFILES}/.ssh/enabled-keys/" ]; then
 fi
 
 step "Enabling key '${KEY_FILE_NAME}'"
-if [ ! -f ${KEY_FILE} ]; then
+if [ ! -f "${KEY_FILE}" ]; then
   hard_fail "The key '${KEY_FILE_NAME}' does not exist."
 fi
 
-if [ -f ${ENABLED_FILE} ]; then
+if [ -f "${ENABLED_FILE}" ]; then
   step_failed "The key '${KEY_FILE_NAME}' has already been enabled."
 else
-  ln -s ${DOTFILES}/.ssh/keys/${KEY_NAME}.${KEY_EXTENSION} ${DOTFILES}/.ssh/enabled-keys/${KEY_NAME}.${KEY_EXTENSION}
+  ln -s "${DOTFILES}/.ssh/keys/${KEY_NAME}.${KEY_EXTENSION}" "${DOTFILES}/.ssh/enabled-keys/${KEY_NAME}.${KEY_EXTENSION}"
 fi
 
-bash ${COMMANDS_DIR}/populate-authorized-keys
+bash "${COMMANDS_DIR}/populate-authorized-keys"

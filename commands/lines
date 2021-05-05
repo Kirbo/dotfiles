@@ -2,12 +2,12 @@
 
 BASH_DIR="${DOTFILES}/bash"
 
-source ${BASH_DIR}/_config.sh
+# shellcheck source=/dev/null
+source "${BASH_DIR}/_config.sh"
 
-COMMANDS="${@:1}"
+COMMANDS="${*:1}"
 
 LINES=$(${COMMANDS})
-STATUS=$?
 
 echo -e "${LINES}"
 

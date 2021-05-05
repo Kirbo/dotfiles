@@ -3,14 +3,14 @@
 batteryStatus() {
   PERCENTAGE_MIN="5"
   ESTIMATE_MIN="0:30"
-
+  
   COMMAND=$(pmset -g batt | grep "InternalBattery")
   STATUS=$(echo "${COMMAND}" | sed -n 's/.*[[:space:]][0-9]*%;[[:space:]]\(.*\);.*/\1/p')
   PERCENTAGE=$(echo "${COMMAND}" | sed -n 's/.*[[:space:]]\([0-9]*\)%;.*/\1/p')
   ESTIMATE=$(echo "${COMMAND}" | sed -n 's/.*[[:space:]]\([0-9]*\):\([0-9]*\).*/\1:\2/p')
-
+  
   STATUS_OUTPUT=false
-
+  
   if [[ "${STATUS}" == "charged" ]]; then
     STATUS_OUTPUT=true
     echo "${STATUS}, ${PERCENTAGE}%, ${ESTIMATE}"
@@ -18,25 +18,25 @@ batteryStatus() {
       echo "Battery full"
     fi
   fi
-
+  
   if [[ "${STATUS}" == "charging" ]]; then
     STATUS_OUTPUT=true
     echo "${STATUS}, ${PERCENTAGE}%, ${ESTIMATE}"
   fi
-
+  
   if [[ "${STATUS}" == "discharging" ]]; then
     STATUS_OUTPUT=true
     echo "${STATUS}, ${PERCENTAGE}%, ${ESTIMATE}"
-    if [[ "${PERCENTAGE}" -lt "${PERCENTAGE_MIN}" ]] || ([[ "${ESTIMATE}" != "" ]] && [[ "${ESTIMATE}" < "${ESTIMATE_MIN}" ]]); then
+    if [[ "${PERCENTAGE}" -lt "${PERCENTAGE_MIN}" ]] || [[ ( "${ESTIMATE}" != "" && "${ESTIMATE}" < "${ESTIMATE_MIN}" ) ]]; then
       echo "Battery ${PERCENTAGE} < ${PERCENTAGE_MIN} or Estimate ${ESTIMATE} < ${ESTIMATE_MIN}"
     fi
   fi
-
+  
   if [[ "${STATUS}" == "finishing charge" ]]; then
     STATUS_OUTPUT=true
     echo "${STATUS}, ${PERCENTAGE}%, ${ESTIMATE}"
   fi
-
+  
   if ! $STATUS_OUTPUT; then
     pmset -g batt
     echo ":::"

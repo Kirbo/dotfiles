@@ -10,7 +10,7 @@ parseFlag () {
         VALUE=true
     fi
 
-    if [[ ! -z "${SHORT}" ]] && [[ ${#SHORT} > 1 ]]; then
+    if [[ ! -z "${SHORT}" ]] && [[ ${#SHORT} -gt 1 ]]; then
         for (( i=0; i<${#SHORT}; i++ )); do
             if (( $i < $(( ${#SHORT} - 1)) )); then
                 VALUE=true

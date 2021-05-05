@@ -7,8 +7,7 @@ source "${BASH_DIR}/_config.sh"
 
 COMMANDS="${*:1}"
 
-clear
-clear
+echo -ne "\033c"
 output_divider "TERMINAL CLEARED"
 
 if [[ "${COMMANDS}" ]]; then

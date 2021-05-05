@@ -1,15 +1,16 @@
 #!/bin/bash
 
-DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+DOTFILES=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 BASH_DIR="${DOTFILES}/bash"
 
-source ${BASH_DIR}/_config.sh
+# shellcheck source=/dev/null
+source "${BASH_DIR}/_config.sh"
 
 THIS_BACKUP="${BACKUP_DIR}/$(date '+%Y-%m-%d_%H:%M:%S')"
 
-cd $HOME
+_cd "${HOME}"
 
-backup_old () {
+backup_old() {
   OLD_PATH=${1}
 
   if [ ! -d "${THIS_BACKUP}" ]; then
@@ -23,7 +24,7 @@ backup_old () {
   continue_if_succeeded
 }
 
-create_symlink () {
+create_symlink() {
   SYMLINK_TO=${1}
 
   minor_step "${SYMLINK_TO}"
@@ -32,34 +33,33 @@ create_symlink () {
   continue_if_succeeded
 }
 
-step 'Adding $PATH into .bash_paths'
-echo "export DOTFILES=\"${DOTFILES}\"" >> ${DOTFILES}/.bash_paths
-echo "export PATH=\"\${DOTFILES}/commands:\$PATH\"" >> ${DOTFILES}/.bash_paths
+step "Adding \$PATH into .bash_paths"
+echo "export DOTFILES=\"${DOTFILES}\"" >>${DOTFILES}/.bash_paths
+echo "export PATH=\"\${DOTFILES}/commands:\$PATH\"" >>${DOTFILES}/.bash_paths
 
 step "Backing up old contents"
-for PATH_TO in ${PATHS_TO_PROCESS[@]}; do
-  if [ -f $PATH_TO ] || [ -d $PATH_TO ]; then
+for PATH_TO in "${PATHS_TO_PROCESS[@]}"; do
+  if [ -f "${PATH_TO}" ] || [ -d "${PATH_TO}" ]; then
     backup_old "${PATH_TO}"
   fi
 done
 continue_if_succeeded
 
 step "Creating symlinks"
-for PATH_TO in ${PATHS_TO_PROCESS[@]}; do
+for PATH_TO in "${PATHS_TO_PROCESS[@]}"; do
   create_symlink "${PATH_TO}"
 done
 continue_if_succeeded
 
-cd ${DOTFILES}
+_cd "${DOTFILES}"
 
 step "Git assume no change"
-git update-index --assume-unchanged ${DOTFILES}/.ssh/authorized_keys
+git update-index --assume-unchanged "${DOTFILES}"/.ssh/authorized_keys
 continue_if_succeeded
 
 step "Copying old 'id_rsa'"
-cp ${THIS_BACKUP}/.ssh/id_rsa ${DOTFILES}/.ssh/id_rsa
+cp "${THIS_BACKUP}"/.ssh/id_rsa "${DOTFILES}"/.ssh/id_rsa
 continue_if_succeeded
-
 
 all_done
 

@@ -11,3 +11,4 @@ local/*
 !.ssh/keys
 #!.ssh/enabled-keys
 !*/.keep
+.DS_Store
