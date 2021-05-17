@@ -19,3 +19,7 @@ alias rasp4="ssh pi@192.168.1.214"
 alias hass="ssh kirbo@192.168.1.210"
 
 alias acme.sh=~/.acme.sh/acme.sh
+
+alias lenovo1="ssh minerstat@192.168.1.41"
+alias lenovo2="ssh minerstat@192.168.1.42"
+
