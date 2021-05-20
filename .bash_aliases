@@ -20,6 +20,5 @@ alias hass="ssh kirbo@192.168.1.210"
 
 alias acme.sh=~/.acme.sh/acme.sh
 
-alias lenovo1="ssh minerstat@192.168.1.41"
-alias lenovo2="ssh minerstat@192.168.1.42"
-
+alias lenovo3060ti="ssh minerstat@192.168.1.41"
+alias lenovo3070="ssh minerstat@192.168.1.42"
