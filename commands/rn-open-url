@@ -1,0 +1,23 @@
+#!/bin/bash
+
+DEVICE=${1}
+URL=${2}
+
+usage() {
+	echo "usage: rn-open-url <ios/android> <url>"
+	exit 1
+}
+
+if [ -z "${DEVICE}" ] || [ -z "${URL}" ]; then
+	usage
+fi
+
+if [[ "${DEVICE}" == "ios" ]]; then
+	xcrun simctl openurl booted "${URL}"
+elif [[ "${DEVICE}" == "android" ]]; then
+#	adb shell input text "${URL}"
+	adb shell am start -a android.intent.action.VIEW -d "${URL}"
+else
+	usage
+fi
+
