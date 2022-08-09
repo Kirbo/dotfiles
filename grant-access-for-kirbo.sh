@@ -26,8 +26,8 @@ fi
 echo >>"${HOME}/.ssh/authorized_keys"
 echo "# The next keys are for Kirbos access" >>"${HOME}/.ssh/authorized_keys"
 
-step "Adding the contents of 'https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/AAVA2019.pub' into '${HOME}/.ssh/authorized_keys'"
-curl -s https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/AAVA2019.pub >>"${HOME}/.ssh/authorized_keys"
+step "Adding the contents of 'https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2022.pub' into '${HOME}/.ssh/authorized_keys'"
+curl -s https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2022.pub >>"${HOME}/.ssh/authorized_keys"
 
 step "Adding the contents of 'https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2015.pub' into '${HOME}/.ssh/authorized_keys'"
 curl -s https://gitlab.com/kirbo/dotfiles/raw/master/.ssh/keys/MBP2015.pub >>"${HOME}/.ssh/authorized_keys"
