@@ -25,3 +25,4 @@ alias lenovo3060ti="ssh minerstat@192.168.1.41"
 alias lenovo3070="ssh minerstat@192.168.1.42"
 
 alias octoprint="ssh pi@192.168.1.200"
+alias proxmox="ssh root@192.168.1.5"
