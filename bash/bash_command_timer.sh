@@ -71,6 +71,28 @@ BCT_MILLIS=1
 BCT_WRAP=0
 
 
+function PrintTime() {
+  local MSEC=1000000
+  local SEC=$(($MSEC * 1000))
+  PRINT_TIME=$(eval $BCTTime)
+  now_str=$(BCTPrintTime $(($PRINT_TIME / $SEC)))
+  local output_str="[ time now: $now_str ]"
+
+  if [ -n "$BCT_COLOR" ]; then
+    local output_str_colored="\033[${BCT_COLOR}m${output_str}\033[0m"
+  else
+    local output_str_colored="${output_str}"
+  fi
+
+  # Move to the end of the line. This will NOT wrap to the next line
+  # unless you have BCT_WRAP == 1
+  echo -ne "$wrap_space_prefix\033[${COLUMNS}C"
+  # Move back (length of output_str) columns.
+  echo -ne "\033[${#output_str}D"
+  # Finally, print output.
+  echo -e "${output_str_colored}"
+}
+
 
 # IMPLEMENTATION
 # ==============
@@ -127,6 +149,7 @@ function BCTPreCommand() {
   if [ -z "$BCT_AT_PROMPT" ]; then
     return
   fi
+  PrintTime
   unset BCT_AT_PROMPT
   BCT_COMMAND_START_TIME=$(eval $BCTTime)
 }
