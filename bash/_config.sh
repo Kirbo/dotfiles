@@ -8,6 +8,7 @@ BACKUP_DIR="${DOTFILES}/backups"
 # Includes
 source "${BASH_DIR}/colors.sh"
 source "${BASH_DIR}/functions.sh"
+source "${BASH_DIR}/bash_command_timer.sh"
 
 # Variables
 KEY_EXTENSION='pub'
