@@ -16,6 +16,9 @@ export PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h:\[\033[1;35m\]\w\[\0
 #  source ~/.profile
 #fi
 
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [ -f /Users/kirbo/.config/yarn/global/node_modules/tabtab/.completions/electron-forge.bash ] && . /Users/kirbo/.config/yarn/global/node_modules/tabtab/.completions/electron-forge.bash
