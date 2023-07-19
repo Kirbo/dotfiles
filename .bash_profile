@@ -15,3 +15,4 @@ fi
 # The original version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/3.9/bin:${PATH}"
 export PATH
+. "/home/kirbo/.acme.sh/acme.sh.env"
